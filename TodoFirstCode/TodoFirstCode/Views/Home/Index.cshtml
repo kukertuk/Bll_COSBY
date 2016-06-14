@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TodoFirstCode.Models.TableTasksModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список задач</h2>
+
+<p>
+    @Html.ActionLink("Создать задачу", "Create")
+</p>
+<table>
+        <tr>
+            <th>
+                Задача
+            </th>
+            <th>
+                Примечания
+            </th>
+            <th>
+                Время создания
+            </th>
+            <th>
+                Статус выполнения
+            </th>
+            <th></th>
+        </tr>
+
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.task_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.task_notes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time_of_create)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status.Status)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Изменить/завершить", "Edit", new { id = item.TableTasksModelId }) |
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.TableTasksModelId })
+                        </td>
+                    </tr>
+                    }
+
+</table>
+
+
+    
