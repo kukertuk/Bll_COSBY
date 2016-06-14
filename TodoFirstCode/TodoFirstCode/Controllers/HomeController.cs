@@ -62,9 +62,8 @@ namespace Todolist.Controllers
         public ActionResult Delete(int id)
         {
             {
-                var TaskDelet = (from data in db.TableTasksModels
-                                 where data.TableTasksModelId == id
-                                 select data).First();
+                var TaskDelet = db.TableTasksModels.Include(p => p.Status).First();
+
                 return View(TaskDelet);
             }
         }
@@ -74,9 +73,8 @@ namespace Todolist.Controllers
         public ActionResult Delete(int id, FormCollection collection)
         {
 
-            var TaskDelet = (from data in db.TableTasksModels
-                             where data.TableTasksModelId == id
-                             select data).First();
+            var TaskDelet = db.TableTasksModels.Include(p => p.Status).First();
+
             try
             {
                 db.TableTasksModels.Remove(TaskDelet);
