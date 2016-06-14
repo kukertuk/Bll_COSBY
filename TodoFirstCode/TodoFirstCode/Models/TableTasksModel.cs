@@ -8,9 +8,9 @@ namespace TodoFirstCode.Models
     public class TableTasksModel
     {
         public int TableTasksModelId { get; set; }
-        public string task_name { get; set; }
-        public string task_notes { get; set; }
-        public DateTime Time_of_create { get; set; }
+        public string TaskName { get; set; }
+        public string TaskNotes { get; set; }
+        public DateTime TimeCreate { get; set; }
 
         public int TaskStatusId { get; set; }
         public TaskStatus Status { get; set; }

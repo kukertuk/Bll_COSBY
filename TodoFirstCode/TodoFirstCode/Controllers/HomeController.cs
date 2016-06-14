@@ -30,7 +30,7 @@ namespace Todolist.Controllers
         [HttpPost]
         public ActionResult Create(TableTasksModel task)
         {
-            task.Time_of_create = DateTime.Now;
+            task.TimeCreate = DateTime.Now;
             db.TableTasksModels.Add(task);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -54,7 +54,7 @@ namespace Todolist.Controllers
         [HttpPost]
         public ActionResult Edit(TableTasksModel task)
         {
-            task.Time_of_create = DateTime.Now;
+            task.TimeCreate = DateTime.Now;
             db.Entry(task).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
