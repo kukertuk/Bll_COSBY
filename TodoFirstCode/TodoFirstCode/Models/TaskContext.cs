@@ -10,12 +10,12 @@ namespace TodoFirstCode.Models
     {
         static TaskContext()
         {
-            Database.SetInitializer<TaskContext>(new ContextInitializer());
-        }
+           Database.SetInitializer<TaskContext>(new ContextInitializer());
+       }
 
-        public TaskContext() : base("TaskDB")
-    { }
-        public DbSet<TableTasksModel> TableTasksModels { get; set; }
-        public DbSet<TaskStatus> TaskStatuses { get; set; }
+      public TaskContext() : base("TaskDB")
+   { }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Status> Statuses { get; set; }
     }
 }

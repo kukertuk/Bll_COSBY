@@ -11,11 +11,11 @@ namespace TodoFirstCode.Models
     {
         protected override void Seed(TaskContext db)
         {
-            TaskStatus S1 = new TaskStatus { Status = "Активно" };
-            TaskStatus S2 = new TaskStatus { Status = "Завершено" };
+            Status S1 = new Status { Condition = "Активно" };
+            Status S2 = new Status { Condition = "Завершено" };
 
-            db.TaskStatuses.Add(S1);
-            db.TaskStatuses.Add(S2);
+            db.Statuses.Add(S1);
+            db.Statuses.Add(S2);
             db.SaveChanges();
         }
     }

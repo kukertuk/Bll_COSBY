@@ -16,22 +16,22 @@ namespace Todolist.Controllers
 
         public ActionResult Index()
         {
-            var Task = db.TableTasksModels.Include(p => p.Status);
+            var Task = db.Tasks.Include(p => p.Status);
             return View(Task.ToList());
         }
 
         public ActionResult Create()
         {
-            SelectList condition = new SelectList(db.TaskStatuses, "Id", "Status");
+            SelectList condition = new SelectList(db.Statuses, "Id", "Condition");
             ViewBag.TaskStatuses = condition;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(TableTasksModel task)
+        public ActionResult Create(Task task)
         {
             task.TimeCreate = DateTime.Now;
-            db.TableTasksModels.Add(task);
+            db.Tasks.Add(task);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -41,10 +41,10 @@ namespace Todolist.Controllers
             {
                 return HttpNotFound();
             }
-            TableTasksModel task = db.TableTasksModels.Find(id);
+            Task task = db.Tasks.Find(id);
             if (task != null)
             {
-                SelectList status = new SelectList(db.TaskStatuses, "Id", "Status", task.TaskStatusId);
+                SelectList status = new SelectList(db.Statuses, "Id", "Condition", task.StatusId);
                 ViewBag.TaskStatuses = status;
                 return View(task);
             }
@@ -52,7 +52,7 @@ namespace Todolist.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(TableTasksModel task)
+        public ActionResult Edit(Task task)
         {
             task.TimeCreate = DateTime.Now;
             db.Entry(task).State = EntityState.Modified;
@@ -61,32 +61,30 @@ namespace Todolist.Controllers
         }
         public ActionResult Delete(int id)
         {
-            {
-                var TaskDelet = db.TableTasksModels.Include(p => p.Status).First();
 
-                return View(TaskDelet);
-            }
+            Task TaskDelet = db.Tasks.Find(id);
+
+            return View(TaskDelet);
         }
 
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Task Task)
         {
 
-            var TaskDelet = db.TableTasksModels.Include(p => p.Status).First();
 
-            try
+            Task TaskDelet = db.Tasks.Find(id);
+            if (TaskDelet != null)
             {
-                db.TableTasksModels.Remove(TaskDelet);
+                db.Tasks.Remove(TaskDelet);
                 db.SaveChanges();
+            }
 
                 return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View(TaskDelet);
-            }
+            
         }
     }
 }
+    
+
 

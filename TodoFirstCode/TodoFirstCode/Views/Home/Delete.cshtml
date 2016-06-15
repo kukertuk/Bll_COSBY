@@ -1,41 +1,42 @@
-﻿@model TodoFirstCode.Models.TableTasksModel
+﻿@model TodoFirstCode.Models.Task
+
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Удалить задачу</h2>
+<h2>Delete</h2>
 
-<h3>Вы уверены в этом?</h3>
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Данные задачи</h4>
+    <h4>Task</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            Статус
+            @Html.DisplayNameFor(model => model.Status.Condition)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status.Status)
+            @Html.DisplayFor(model => model.Status.Condition)
         </dd>
 
         <dt>
-            Задача
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaskName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>
-            Примечания
+            @Html.DisplayNameFor(model => model.Notes)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaskNotes)
+            @Html.DisplayFor(model => model.Notes)
         </dd>
 
         <dt>
-            Дата создания
+            @Html.DisplayNameFor(model => model.TimeCreate)
         </dt>
 
         <dd>
@@ -48,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("К списку", "Index")
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>
