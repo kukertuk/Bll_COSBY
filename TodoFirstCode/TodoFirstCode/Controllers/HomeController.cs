@@ -12,21 +12,17 @@ namespace Todolist.Controllers
     public class HomeController : Controller
     {
         TaskContext db = new TaskContext();
-
-
         public ActionResult Index()
         {
             var Task = db.Tasks.Include(p => p.Status);
             return View(Task.ToList());
         }
-
         public ActionResult Create()
         {
             SelectList condition = new SelectList(db.Statuses, "Id", "Condition");
             ViewBag.TaskStatuses = condition;
             return View();
         }
-
         [HttpPost]
         public ActionResult Create(Task task)
         {
@@ -50,7 +46,6 @@ namespace Todolist.Controllers
             }
             return RedirectToAction("Index");
         }
-
         [HttpPost]
         public ActionResult Edit(Task task)
         {
@@ -61,30 +56,22 @@ namespace Todolist.Controllers
         }
         public ActionResult Delete(int id)
         {
-
-            Task TaskDelet = db.Tasks.Find(id);
-
+            var TaskDelet = db.Tasks.Find(id);
             return View(TaskDelet);
         }
-
-
         [HttpPost]
         public ActionResult Delete(int id, Task Task)
         {
-
-
-            Task TaskDelet = db.Tasks.Find(id);
+            var TaskDelet = db.Tasks.Find(id);
             if (TaskDelet != null)
             {
                 db.Tasks.Remove(TaskDelet);
                 db.SaveChanges();
             }
-
-                return RedirectToAction("Index");
-            
+            return RedirectToAction("Index");
         }
     }
 }
-    
+
 
 
